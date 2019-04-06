@@ -1,0 +1,186 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html  class="no-js" lang="fa" dir="rtl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
+    <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+ <script type="text/javascript" src="{% static 'js.js' %}"></script>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+
+
+
+    <title> مشاوره مهندس شهبازی </title>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">سامانه مدیریت مهندس شهبازی</a>
+
+</nav>
+
+
+<!---------END Template------------------>
+
+
+
+
+<div class="bg-img">
+<div class="container">
+
+    <div class="row">
+
+
+        <div class="col-12 col-md-7" style="margin-top: 5%;">
+            <div class="intro">
+            <h1> سامانه مهندس شهبازی</h1>
+            <h4> مدیریت فعالیت دانش آموزان </h4>
+                <ul style="padding: 5%;">
+                    <li> ثبت مطالعه روزانه</li>
+                    <li>مشاهده و بررسی نتایح آزمون ها</li>
+                    <li>...</li>
+                </ul>
+                <h3><a href="#"> <span class="badge badge-pill badge-info">دانلود اپلیکیشن آندروید <i class="fa fa-android" aria-hidden="true"></i> </span></a></h3>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-5 card shadowcard" id="cardlogin" style="margin-top: 5%;" >
+
+            <ul class="nav nav-links nav-tabs nav-fill" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="false">ورود</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " id="signup-tab" data-toggle="tab" href="#signup" role="tab" aria-controls="signup" aria-selected="true">ثبت نام</a>
+                </li>
+
+
+            </ul>
+
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane " id="signup" role="tabpanel" aria-labelledby="signup-tab">
+
+                        <form id="form-signup">
+                                <div class="form-group">
+                                <input name="username" type="text" id="username" class="form-control" aria-describedby="username" placeholder="نام کاربری خود را وارد کنید" required autofocus>
+                                <small id="usernamehelp" class="form-text text-muted">نام کاربری شما در سایت قابل مشاهده نیست!</small>
+                                </div>
+
+
+                            <div class="form-group">
+                                <input name="fullname" type="text" id="fullname" class="form-control" aria-describedby="fullname"  placeholder="نام و نام خانوادگی خود را وارد کنید" required autofocus>
+                                </div>
+
+                            <div class="form-group">
+                                <input name="phonenumber" type="text" id="phonenumber" class="form-control" aria-describedby="phonenumber"  placeholder="شماره تلفن همراه خود را وارد کنید" required autofocus pattern="09[0-9]{9}" maxlength="12">
+                                <small id="phonenumberhelp" class="form-text text-muted">شماره تلفن همراه باید به فرمت 09xxxxxxxxx باشد</small>
+                                </div>
+
+                                <div class="form-group">
+                                <input name="email" type="email" id="email" class="form-control" placeholder="ایمیل خود را وارد کنید" required>
+                                </div>
+
+                                <div class="form-group">
+                                <input name="password" type="password" onkeyup='check();' id="password" class="form-control" placeholder="گذرواژه خود را وارد کنید" required>
+                                </div>
+
+                            <div class="form-group">
+                                <input type="password" onkeyup='check();' id="againpassword" class="form-control" placeholder="گذرواژه خود را مجددا وارد کنید" required>
+                                </div>
+
+                            <div class="form-group"><div class="g-recaptcha" data-sitekey="6LeaTUQUAAAAAM-Bp5PDrcUxwELmEV0NhChpGJfQ"></div> </div>
+
+                                <button id="regbutton" class="btn   btn-sm btn-primary btn-block" type="submit" id="load" data-loading-text="<i class='fa fa-spinner fa-spin '></i> در حال ثبت نام">ثبت نام</button>
+                        </form>
+
+                    </div>
+                    <div class="tab-pane active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        <form id="form-signin">
+                                <div class="form-group">
+                                <label for="usernamelogin" >نام کاربری</label>
+                                <input name="username" type="text" id="usernamelogin" class="form-control" aria-describedby="inputUsername" placeholder="نام کاربری خود را وارد کنید" required autofocus>
+                                <small id="emailHelp" class="form-text text-muted">نام کاربری شما در سایت قابل مشاهده نیست!</small>
+                                </div>
+                                <div class="form-group">
+                                <label for="inputPassword" >گذرواژه</label>
+                                <input name="password" type="password" id="inputPassword" class="form-control" placeholder="گذرواژه خود را وارد کنید" required>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="remember-me"> مرا به خاطرت نگه دار!
+                                    </label>
+                                </div>
+
+                            <div class="form-group"><div class="g-recaptcha" data-sitekey="6LeaTUQUAAAAAM-Bp5PDrcUxwELmEV0NhChpGJfQ"></div></div>
+
+                                <button class="btn  btn-sm btn-success btn-block" type="submit">ورود</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+
+
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+
+
+
+
+‍‍‍
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+<script>
+  $(function () {
+    $('#myTab li:last-child a').tab('show')
+  })
+</script>
+
+
+
+
+
+
+</body>
+</html>
+

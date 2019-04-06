@@ -10,7 +10,7 @@ from django.http import HttpResponse
 
 def index(request):
     context = {}
-    template = loader.get_template('app/index.html')
+    template = loader.get_template('home.html')
     return HttpResponse(template.render(context, request))
 
 
