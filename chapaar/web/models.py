@@ -9,6 +9,7 @@ from django_jalali.db import models as jmodels
 
 class Category(models.Model):
     Name = models.CharField(max_length=50)
+    Num = models.CharField(max_length=10)
 
     def __str__(self):
         return "{}".format(self.Name)
@@ -19,14 +20,13 @@ class Student(models.Model):
     PhoneNumber = models.CharField(max_length=15, blank=True)
     ParentPhoneNumber = models.CharField(max_length=15, blank=True)
     #Avatar = models.ImageField(upload_to='web/static/avatar/', default='web/static/avatar/default.png')
-    Name = models.CharField(max_length=30, blank=True)
-    Family = models.CharField(max_length=30, blank=True)
+    Name = models.CharField(max_length=40, blank=True)
     IsValid = models.BooleanField(default=False)
     Smsactive = models.BooleanField(default=True)
     Grade = models.ForeignKey(Category, blank=True, null=True , on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{}  {}".format(self.Name, self.Family)
+        return "{}".format(self.Name)
 
 
 class Course(models.Model) :

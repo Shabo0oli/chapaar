@@ -56,7 +56,7 @@ $('#form-signin').on('submit',function (e) {
 
         if (json_obj.response === '200')
         {
-            window.location.href  = "/dashboard";
+            window.location.href  = "";
         }
         else
         {
