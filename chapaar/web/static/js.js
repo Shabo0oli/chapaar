@@ -30,7 +30,6 @@ $('#form-signup').on('submit',function (e) {
         data : $('#form-signup').serialize(),
         success: function(json_obj) {
         alert(json_obj.message);
-        document.getElementById("form-signup").reset();
     }
     });
 });
@@ -62,7 +61,6 @@ $('#form-signin').on('submit',function (e) {
         {
            alert(json_obj.message);
         }
-        document.getElementById("form-signin").reset();
     }
     });
 });

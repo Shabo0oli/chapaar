@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_jalali',
     'web',
+    'mathfilters',
     'phonenumber_field',
 ]
 

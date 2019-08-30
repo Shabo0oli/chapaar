@@ -33,12 +33,12 @@
   ],
   "homepage": "https://datatables.net",
   "license": "MIT",
-  "version": "2.1.0",
-  "_release": "2.1.0",
+  "version": "2.2.0",
+  "_release": "2.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "2.1.0",
-    "commit": "e62a8224143063790e7c997758315351a02542b3"
+    "tag": "2.2.0",
+    "commit": "f991cce1573db08b38c5e293ff7626373d8573b9"
   },
   "_source": "https://github.com/DataTables/Dist-DataTables-Responsive.git",
   "_target": "^2.0.2",

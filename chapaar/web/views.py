@@ -12,6 +12,8 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import *
 from json import JSONEncoder
 from django.contrib.admin.views.decorators import staff_member_required
+from django.db.models import Sum
+
 
 import jdatetime
 
@@ -36,6 +38,31 @@ def studentpanel(request):
 
 
     currentDate = jdatetime.date.today()
+    pastDate = jdatetime.date.today().__add__(jdatetime.timedelta(days=-7))
+    donat = list(Done.objects.filter(StudentName__Username=request.user,DoneDate__gte=pastDate , DoneDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))).values('CourseName__Name').order_by('CourseName__Name').annotate(sum=Sum('StudyHour')))
+    donatTest = list(Done.objects.filter(StudentName__Username=request.user,DoneDate__gte=pastDate , DoneDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))).values('CourseName__Name').order_by('CourseName__Name').annotate(sum=Sum('TestNumber')))
+    allTodo = list(Todo.objects.filter(StudentName__Username=request.user,DueDate__gte=pastDate , DueDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))))
+    allDone = list(Done.objects.filter(StudentName__Username=request.user,DoneDate__gte=pastDate , DoneDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))))
+
+    all = {}
+    for done in allDone :
+        all[(done.CourseName , done.DoneDate)] = (None , done )
+    for todo in allTodo :
+        if (todo.CourseName , todo.DueDate) in all.keys() :
+            (x,y) = all[(todo.CourseName , todo.DueDate)]
+            all[(todo.CourseName, todo.DueDate)] = (todo,y)
+        else :
+            all[(todo.CourseName, todo.DueDate)] = (todo , None)
+
+    context['all'] = all
+
+
+
+    student = Student.objects.get(Username = request.user)
+    context['Student'] = student
+    context['Courses'] = []
+
+
 
     context['ReportDay'] = currentDate.day
     context['ReportMonth'] = jdatetime.date.j_months_fa[currentDate.month - 1]
@@ -51,6 +78,26 @@ def studentpanel(request):
         'CourseName__id')
     yesterdayDoneList = Done.objects.filter(StudentName__Username=request.user, DoneDate=yesterday).order_by(
         'CourseName__id')
+
+
+    courses = Course.objects.filter(Grade = student.Grade)
+    for course in courses :
+        c = {}
+        c['Name'] = course.Name
+        c['id'] = course.id
+        done = Done.objects.filter(StudentName__Username=request.user, DoneDate=yesterday, CourseName = course)
+        donecurrent = Done.objects.filter(StudentName__Username=request.user, DoneDate=jdatetime.date.today(), CourseName = course)
+        c['read'] = 0
+        c['test'] = 0
+        c['readcurrent'] = 0
+        c['testcurrent'] = 0
+        if len(done) :
+            c['read'] = done[0].StudyHour
+            c['test'] = done[0].TestNumber
+        if len(donecurrent) :
+            c['readcurrent'] = donecurrent[0].StudyHour
+            c['testcurrent'] = donecurrent[0].TestNumber
+        context['Courses'].append(c)
 
     isOk = 0
     if Done.objects.filter(StudentName__Username=request.user, DoneDate=yesterday):
@@ -78,30 +125,41 @@ def studentpanel(request):
     if isOk == 0:
         list2 = list1
 
-    list = zip(list1, list2)
-    context['List'] = list
+    list3 = zip(list1, list2)
+    context['List'] = list3
     day = jdatetime.date.today()
     context['readinghour'] = []
     context['todosHours'] = []
+    context['testeddone'] = []
+    context['testedtodos'] = []
     context['days'] = []
     for i in range(0,7):
         day = day.__add__(jdatetime.timedelta(days=-1))
         dones = Done.objects.filter(StudentName__Username=request.user ,DoneDate=day )
         todos = Todo.objects.filter(StudentName__Username=request.user ,DueDate=day )
         todosHours = 0
+        testeddone = 0
+        testedtodos = 0
         readinghours = 0
         for d in dones :
             todosHours += d.StudyHour
+            testedtodos += d.TestNumber
         for d in todos :
             readinghours += d.StudyHour
+            testeddone += d.TestNumber
         context['days'].append(day.day)
         context['readinghour'].append(readinghours)
+        context['testeddone'].append(testeddone)
         context['todosHours'].append(todosHours)
+        context['testedtodos'].append(testedtodos)
 
     st = Student.objects.filter(Username=request.user)[0]
     context['notseen'] = Notify.objects.filter(Receiver=st, Seen=False).count()
 
 
+
+    context['donat'] = donat
+    context['donatTest'] = donatTest
 
 
 
@@ -125,6 +183,7 @@ def index(request):
     if request.user.is_authenticated and  request.user.is_superuser:
         return adminpanel(request)
     elif request.user.is_authenticated:
+
         return studentpanel(request)
     else:
         context = {}
@@ -149,11 +208,14 @@ def apiregister(request) :
     context = {}
     msg = request.POST
 
-    if 'username' not in msg or 'fullname' not in msg or 'password' not in msg or 'phonenumber' not in msg or 'parentphonenumber' not in msg :
+    if 'fullname' not in msg or 'password' not in msg or 'phonenumber' not in msg or 'parentphonenumber' not in msg :
         context['message'] = 'مشخصات را به درستی وارد کنید'
         return JsonResponse(context, encoder=JSONEncoder)
 
-    username = msg['username']
+    username = msg['phonenumber']
+    if len(username)!=11 or username[0]!="0" or username[1]!="9" or not str(username).isdigit():
+        context['message']='شماره تلفن موبایل خود را به درستی وارد کنید.به صورت اعداد انگلیسی و به فرمت 09123456789'
+        return JsonResponse(context , encoder=JSONEncoder)
     Fullname = msg['fullname']
     Password = msg['password']
     Phonenumber = msg['phonenumber']
@@ -183,7 +245,7 @@ def apilogin(request):
         if user is not None :
             if Student.objects.filter(Username=user).count() >0  :
                 leader = Student.objects.get(Username=user)
-                if( not leader.isValid ) :
+                if( not leader.IsValid ) :
                     context['message'] = 'اکانت شما هنوز تایید نشده است'
                 else :
                     login(request, user)
@@ -224,3 +286,55 @@ def settodo(request , studentid):
     context['Courses'] = courses
     template = loader.get_template('app/settodo.html')
     return HttpResponse(template.render(context, request))
+
+
+
+def report(request):
+
+
+    context = {}
+    currentDate = jdatetime.date.today()
+
+    context['ReportDay'] = currentDate.day
+    context['ReportMonth'] = jdatetime.date.j_months_fa[ currentDate.month-1 ]
+    context['ReportYear'] = currentDate.year
+
+    yesterday = currentDate.__add__(jdatetime.timedelta(days=-1))
+
+    context['ReportYesterdayDay'] = yesterday.day
+    context['ReportYesterdayMonth'] = jdatetime.date.j_months_fa[ yesterday.month-1 ]
+    context['ReportYesterdayYear'] = yesterday.year
+
+    if request.method == "POST":
+        if 'yesterday' in request.POST :
+            for i in range(0, 50):
+                tagName = 'readed' + str(i)
+                if tagName in request.POST:
+                    readed = request.POST[tagName]
+                    if not readed :
+                        readed = '0'
+                    tested = request.POST['test' + str(i)]
+                    if not tested :
+                        tested = '0'
+                    st = Student.objects.filter(Username=request.user)[0]
+                    cr = Course.objects.filter(id=i)[0]
+                    record = Done(StudentName=st, DoneDate=yesterday, CourseName=cr, StudyHour=readed,
+                                  TestNumber=tested)
+                    record.save()
+
+        else :
+            for i in range(0, 50):
+                tagName = 'readed' + str(i)
+                if tagName in request.POST:
+                    readed = request.POST[tagName]
+                    if not readed:
+                        readed = '0'
+                    tested = request.POST['test' + str(i)]
+                    if not tested:
+                        tested = '0'
+                    st = Student.objects.filter(Username=request.user)[0]
+                    cr = Course.objects.filter(id=i)[0]
+                    record = Done(StudentName=st, DoneDate=jdatetime.date.today(), CourseName=cr, StudyHour=readed, TestNumber=tested)
+                    record.save()
+    return  studentpanel(request)
+

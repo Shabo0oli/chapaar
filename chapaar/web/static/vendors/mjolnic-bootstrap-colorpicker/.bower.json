@@ -1,12 +1,11 @@
 {
-  "name": "mjolnic-bootstrap-colorpicker",
+  "name": "bootstrap-colorpicker",
   "main": [
     "dist/css/bootstrap-colorpicker.css",
     "dist/js/bootstrap-colorpicker.js"
   ],
   "dependencies": {
-    "jquery": ">=1.10",
-    "bootstrap": ">=2"
+    "jquery": ">=1.10"
   },
   "ignore": [
     "\\.*",
@@ -18,15 +17,15 @@
     "/travis.sh",
     "/server.js"
   ],
-  "homepage": "https://github.com/mjolnic/bootstrap-colorpicker",
-  "version": "2.3.3",
-  "_release": "2.3.3",
+  "homepage": "https://github.com/itsjavi/bootstrap-colorpicker",
+  "version": "2.5.1",
+  "_release": "2.5.1",
   "_resolution": {
     "type": "version",
-    "tag": "2.3.3",
-    "commit": "59f06437c86b7c0e074aee8a699819fd1c07a173"
+    "tag": "2.5.1",
+    "commit": "db978b4d8c3436cdaed6e3a1a065f9f47bb686b1"
   },
-  "_source": "https://github.com/mjolnic/bootstrap-colorpicker.git",
+  "_source": "https://github.com/itsjavi/bootstrap-colorpicker.git",
   "_target": "^2.3.3",
   "_originalSource": "bootstrap-colorpicker"
 }

@@ -11,17 +11,17 @@
 
 ## Table of contents
 
-  - [Features](#features)
-  - [Main](#main)
-  - [Getting started](#getting-started)
-  - [Options](#options)
-  - [Methods](#methods)
-  - [Events](#events)
-  - [No conflict](#no-conflict)
-  - [Browser support](#browser-support)
-  - [Contributing](#contributing)
-  - [Versioning](#versioning)
-  - [License](#license)
+- [Features](#features)
+- [Main](#main)
+- [Getting started](#getting-started)
+- [Options](#options)
+- [Methods](#methods)
+- [Events](#events)
+- [No conflict](#no-conflict)
+- [Browser support](#browser-support)
+- [Contributing](#contributing)
+- [Versioning](#versioning)
+- [License](#license)
 
 
 
@@ -48,7 +48,7 @@
 dist/
 ├── cropper.css     ( 5 KB)
 ├── cropper.min.css ( 4 KB)
-├── cropper.js      (79 KB)
+├── cropper.js      (78 KB)
 └── cropper.min.js  (28 KB)
 ```
 
@@ -62,8 +62,8 @@ Four quick start options are available:
 
 - [Download the latest release](https://github.com/fengyuanchen/cropper/archive/master.zip).
 - Clone the repository: `git clone https://github.com/fengyuanchen/cropper.git`.
-- Install with [NPM](http://npmjs.org): `npm install cropper`.
-- Install with [Bower](http://bower.io): `bower install cropper`.
+- Install with [NPM](https://npmjs.com): `npm install cropper`.
+- Install with [Bower](https://bower.io): `bower install cropper`.
 
 
 
@@ -116,7 +116,24 @@ $('#image').cropper({
 
 #### FAQ
 
-See the [FAQ](FAQ.md) documentation.
+##### How to crop a new area after zoom in or zoom out?
+
+> Just double click your mouse to enter crop mode.
+
+
+##### How to move the image after crop an area?
+
+> Just double click your mouse to enter move mode.
+
+
+##### How to fix aspect ratio in free ratio mode?
+
+> Just hold the `shift` key when you resize the crop box.
+
+
+##### How to crop a square area in free ratio mode?
+
+> Just hold the `shift` key when you crop on the image.
 
 
 #### Notes
@@ -238,6 +255,8 @@ By adding `crossOrigin` attribute to image will stop adding timestamp to image u
 Check the current image's Exif Orientation information.
 
 More exactly, read the Orientation value for rotating or flipping the image, and then override the Orientation value with `1` (the default value) to avoid some issues (#120, #509) on iOS devices.
+
+Requires to set both the `rotatable` and `scalable` options to `true` at the same time.
 
 **Note:** Don't trust this all the time as some JPG images have incorrect (not standard) Orientation values.
 
@@ -833,6 +852,7 @@ Change the crop box position and size with new data.
     - `width`: the destination width of the output canvas
     - `height`: the destination height of the output canvas
     - `fillColor`: a color to fill any alpha values in the output canvas
+  - Note: The aspect ratio of the output canvas will be fitted to aspect ratio of the crop box automatically.
 
 - (return  value):
   - Type: `HTMLCanvasElement`
@@ -1076,10 +1096,10 @@ Maintained under the [Semantic Versioning guidelines](http://semver.org/).
 - [ngCropper](https://github.com/koorgoo/ngCropper) by @koorgoo
 - [ngCropper](https://github.com/alexisnomine/ngCropper) by @alexisnomine
 - [react-cropper](https://github.com/roadmanfong/react-cropper) by @roadmanfong
-- [redux-cropper](https://github.com/lapanoid/redux-cropper) @lapanoid
-- [meteor-cropper](https://github.com/jonblum/meteor-cropper) @jonblum
-- [ember-cli-cropper](https://github.com/anilmaurya/ember-cli-cropper) @anilmaurya
-- [ember-cli-image-cropper](https://github.com/mhretab/ember-cli-image-cropper) @mhretab
+- [redux-cropper](https://github.com/lapanoid/redux-cropper) by @lapanoid
+- [meteor-cropper](https://github.com/jonblum/meteor-cropper) by @jonblum
+- [ember-cli-cropper](https://github.com/anilmaurya/ember-cli-cropper) by @anilmaurya
+- [ember-cli-image-cropper](https://github.com/mhretab/ember-cli-image-cropper) by @mhretab
 
 
 [⬆ back to top](#table-of-contents)
