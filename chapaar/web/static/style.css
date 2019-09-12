@@ -1,0 +1,44 @@
+body{
+    font-family: 'Vazir', sans-serif;
+}
+
+.welcome{
+    background-image: -moz-linear-gradient(0deg, #766dff 0%, #88f3ff 100%);
+  background-image: -webkit-linear-gradient(0deg, #766dff 0%, #88f3ff 100%);
+  background-image: -ms-linear-gradient(0deg, #766dff 0%, #88f3ff 100%);
+}
+
+
+.shadowcard{
+    box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, .3);
+    padding-left: 0% !important;
+    padding-right: 0% !important;
+    border-radius: 30px !important;
+    padding-bottom: 2%;
+}
+
+
+.nav-link .active{
+    background-color: rgba(255, 255, 255, .3) !important;
+    box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.3);
+
+}
+
+.nav-link {
+    background-color: rgba(255, 255, 255, .3) !important;
+}
+
+input{
+    background-color: rgba(255, 255, 255, .5) !important;
+    box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.3);
+
+}
+
+.curvedtopright{
+    border-top-right-radius: 30px !important;
+}
+
+.curvedtopleft{
+    border-top-left-radius: 30px !important;
+}
