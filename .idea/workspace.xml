@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4308bc8-9b38-4152-a500-3ef47a82ca0c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chapaar/web/static/style.css" afterPath="$PROJECT_DIR$/chapaar/web/static/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chapaar/web/templates/home.html" afterPath="$PROJECT_DIR$/chapaar/web/templates/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chapaar/web/templates/app/adminpanel.html" afterPath="$PROJECT_DIR$/chapaar/web/templates/app/adminpanel.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,7 +26,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chapaar/web/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
@@ -38,6 +36,26 @@
                 <element signature="n#style#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chapaar/web/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2957">
+              <caret line="56" column="24" lean-forward="false" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adminpanel.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/chapaar/web/templates/app/adminpanel.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="376">
+              <caret line="141" column="6" lean-forward="true" selection-start-line="141" selection-start-column="6" selection-end-line="141" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -139,7 +157,6 @@
         <option value="$PROJECT_DIR$/chapaar/chapaar/urls.py" />
         <option value="$PROJECT_DIR$/chapaar/web/admin.py" />
         <option value="$PROJECT_DIR$/chapaar/web/templates/app/sidebar_admin.html" />
-        <option value="$PROJECT_DIR$/chapaar/web/templates/app/adminpanel.html" />
         <option value="$PROJECT_DIR$/chapaar/web/templates/app/settodo.html" />
         <option value="$PROJECT_DIR$/chapaar/web/models.py" />
         <option value="$PROJECT_DIR$/chapaar/web/templates/app/sidebar_student.html" />
@@ -169,6 +186,7 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/chapaar/web/static/style.css" />
         <option value="$PROJECT_DIR$/chapaar/web/templates/home.html" />
+        <option value="$PROJECT_DIR$/chapaar/web/templates/app/adminpanel.html" />
       </list>
     </option>
   </component>
@@ -283,7 +301,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -624,13 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chapaar/web/templates/app/adminpanel.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1680">
-          <caret line="112" column="114" lean-forward="false" selection-start-line="112" selection-start-column="114" selection-end-line="112" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chapaar/web/static/vendors/datatables.net-responsive/js/dataTables.responsive.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -920,13 +935,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chapaar/web/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="56" column="24" lean-forward="false" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chapaar/web/templates/app/sidebar_student.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -989,6 +997,22 @@
             <element signature="n#style#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chapaar/web/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2957">
+          <caret line="56" column="24" lean-forward="false" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chapaar/web/templates/app/adminpanel.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="141" column="6" lean-forward="true" selection-start-line="141" selection-start-column="6" selection-end-line="141" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
