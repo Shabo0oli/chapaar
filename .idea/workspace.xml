@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4308bc8-9b38-4152-a500-3ef47a82ca0c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/chapaar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/chapaar.iml" afterDir="false" />
+    <list default="true" id="f4308bc8-9b38-4152-a500-3ef47a82ca0c" name="Default" comment="Fix Tables Konkur">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chapaar/web/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/chapaar/web/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chapaar/web/templates/app/base_site_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/chapaar/web/templates/app/base_site_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chapaar/web/templates/app/settodo.html" beforeDir="false" afterPath="$PROJECT_DIR$/chapaar/web/templates/app/settodo.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,6 +84,10 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/chapaar/web/static/persianDatepicker" />
+      <recent name="$PROJECT_DIR$/chapaar/web/static" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/chapaar/web/templates/app" />
     </key>
@@ -160,8 +164,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1554553173776</updated>
-      <workItem from="1568563162574" duration="1532000" />
+      <workItem from="1568563162574" duration="3910000" />
     </task>
+    <task id="LOCAL-00001" summary="Fix Tables Konkur">
+      <created>1568564712657</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1568564712657</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -186,5 +198,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fix Tables Konkur" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Tables Konkur" />
   </component>
 </project>
