@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'login/$', views.apilogin, name='apilogin'),
     url(r'verify/$', views.verify, name='verify'),
     url(r'settodo/([0-9]+)/$', views.settodo, name='settodo'),
+    url(r'student/([0-9]+)/$', views.student, name='student'),
 
     # The home page
     url(r'^$', views.index, name='index'),

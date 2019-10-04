@@ -1,0 +1,544 @@
+{% extends "app/base_site_student.html" %}
+{% load mathfilters %}
+
+{% block title %} پنل مدیریت {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>بازه ی گزارش <small> به صورت پیش فرض  هفتگی میباشد</small></h2>
+                            <div class="filter">
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                <form method="post">
+
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="date_id"> از تاریخ <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <input type="text" id="input1date" name="fromdate" required="required" class="form-control col-md-7 col-xs-12"/>
+                                                <span id="span1date"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2 col-sm-2 col-xs-12" for="date_id"> تا تاریخ <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <input type="text" id="input2date" name="todate" required="required" class="form-control col-md-7 col-xs-12"/>
+                                                <span id="span1date"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group" style="margin-top: 1%;">
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-success btn-block">ثبت</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+
+
+
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>مجموع ساعت در روز <small> پیشرفت هفتگی</small></h2>
+                            <div class="filter">
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                <canvas id="lineChart11"></canvas>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>مجموع تست در روز <small> پیشرفت هفتگی</small></h2>
+                        <div class="filter">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+
+                            <canvas id="lineChart22"></canvas>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2> میزان مطالعه درسی <small>توزیع هر درس</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div class="row" style="border-bottom: 1px solid #E0E0E0; padding-bottom: 5px; margin-bottom: 5px;">
+
+
+                            <div class="col-md-4">
+                                <div class="row" style="text-align: center;">
+                                    <div class="col-md-6">
+                                        <canvas id="donat" height="200" width="200" style="margin: 2%"></canvas>
+                                        <h4 style="margin:0">میزان مطالعه هفتگی هر درس</h4>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row" style="text-align: center;">
+                                    <div class="col-md-6">
+                                        <canvas id="donatTest" height="200" width="200" style="margin: 2%"></canvas>
+                                        <h4 style="margin:0">میزان تست  هفتگی هر درس</h4>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2> میزان مطالعه درسی <small>توزیع هر درس</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div class="row" style="border-bottom: 1px solid #E0E0E0; padding-bottom: 5px; margin-bottom: 5px;">
+
+
+                            <div class="table-responsive">
+                                <table id="datatable-responsive3" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">                      <thead>
+                                <th> روز </th>
+                                <th>نام درس</th>
+                                <th>میزان ساعت مطالعه برنامه</th>
+                                <th> میزان ساعت مطالعه شده </th>
+                                <th>اختلاف</th>
+                                <th>تعداد تست برنامه</th>
+                                <th> تعداد تست زده شده </th>
+                                <th>اختلاف</th>
+                                </thead>
+                                    <tbody>
+
+                                    {% for key,value in all.items %}
+                                        <tr>
+                                            <td>{{  key.1 }}</td>
+                                            <td>{{ key.0.Name }}</td>
+                                            <td>{{ value.0.StudyHour }}</td>
+                                            <td>{{value.1.StudyHour}}</td>
+                                            <td>{% if value.1 and value.0 %}{{ value.1.StudyHour|sub:value.0.StudyHour }}{% else %} 0 {% endif %}</td>
+                                            <td>{{ value.0.TestNumber }}</td>
+                                            <td>{{ value.1.TestNumber }}</td>
+                                            <td>{% if value.1 and value.0 %}{{ value.1.TestNumber|sub:value.0.TestNumber }}{% else %} 0 {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super}}
+    <!-- Chart.js -->
+    <script src="/static/vendors/Chart.js/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+
+    <!-- gauge.js -->
+    <script src="/static/vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- Skycons -->
+    <script src="/static/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="/static/vendors/Flot/jquery.flot.js"></script>
+    <script src="/static/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="/static/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="/static/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="/static/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="/static/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="/static/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="/static/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="/static/vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="/static/vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="/static/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="/static/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+
+    <!-- Datatables -->
+    <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="/static/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="/static/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/static/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="/static/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="/static/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/static/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <script>
+
+
+
+
+
+
+        /**function gd(year, month, day) {
+    return new Date(year, month - 1, day).getTime();
+}
+
+         var chart_plot_02_data_reading_weakly = [];
+         {% for day in readinglist %}
+             chart_plot_02_data_reading_weakly.push([
+             {{day.date}}  , {{day.readinghour}}
+             ]);
+         {% endfor %}
+
+
+         var chart_plot_02_settings_reading_weakly = {
+        grid: {
+            show: true,
+            aboveData: true,
+            color: "#3f3f3f",
+            labelMargin: 10,
+            axisMargin: 0,
+            borderWidth: 0,
+            borderColor: null,
+            minBorderMargin: 5,
+            clickable: true,
+            hoverable: true,
+            autoHighlight: true,
+            mouseActiveRadius: 100
+        },
+        series: {
+            lines: {
+                show: true,
+                fill: true,
+                lineWidth: 2,
+                steps: false
+            },
+            points: {
+                show: true,
+                radius: 4.5,
+                symbol: "circle",
+                lineWidth: 3.0
+            }
+        },
+        legend: {
+            position: "ne",
+            margin: [0, -25],
+            noColumns: 0,
+            labelBoxBorderColor: null,
+            labelFormatter: function(label, series) {
+                return label + '&nbsp;&nbsp;';
+            },
+            width: 40,
+            height: 1
+        },
+        colors: ['#96CA59', '#3F97EB', '#72c380', '#6f7a8a', '#f7cb38', '#5a8022', '#2c7282'],
+        shadowSize: 0,
+        tooltip: true,
+        tooltipOpts: {
+            content: "%s: %y.0",
+            xDateFormat: "%d/%m",
+            shifts: {
+                x: -30,
+                y: -50
+            },
+            defaultTheme: false
+        },
+        yaxis: {
+            min: 0
+        },
+        xaxis: {
+            mode: "time",
+            minTickSize: [1, "day"],
+            timeformat: "%d/%m/%y",
+            min: chart_plot_02_data_reading_weakly[0][0],
+            max: chart_plot_02_data_reading_weakly[6][0]
+        }
+    };
+
+
+
+
+
+         $.plot($("#chart_plot_02_reading_student_weakly"), [{
+            label: "مطالعه هفتگی",
+            data: chart_plot_02_data_reading_weakly,
+            lines: {
+                fillColor: "rgba(150, 202, 89, 0.12)"
+            },
+            points: {
+                fillColor: "#fff"
+            }
+        }], chart_plot_02_settings_reading_weakly);***/
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+
+
+        Chart.defaults.global.legend = {
+            enabled: false
+        };
+
+
+        var ctx = document.getElementById("lineChart11");
+        var lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{days}},
+                datasets: [{
+                    label: "میزان ساعت برنامه درسی ",
+                    backgroundColor: "rgba(38, 185, 154, 0.31)",
+                    borderColor: "rgba(38, 185, 154, 0.7)",
+                    pointBorderColor: "rgba(38, 185, 154, 0.7)",
+                    pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointBorderWidth: 1,
+                    data: {{readinghour}}
+                }, {
+                    label: " میزان ساعت مطالعه شده ",
+                    backgroundColor: "rgba(3, 88, 106, 0.3)",
+                    borderColor: "rgba(3, 88, 106, 0.70)",
+                    pointBorderColor: "rgba(3, 88, 106, 0.70)",
+                    pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(151,187,205,1)",
+                    pointBorderWidth: 1,
+                    data: {{todosHours}}
+                }]
+            },
+        });
+
+
+
+
+
+        var ctx = document.getElementById("lineChart22");
+        var lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{days}},
+                datasets: [{
+                    label: "میزان تست برنامه درسی ",
+                    backgroundColor: "rgba(38, 185, 154, 0.31)",
+                    borderColor: "rgba(38, 185, 154, 0.7)",
+                    pointBorderColor: "rgba(38, 185, 154, 0.7)",
+                    pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointBorderWidth: 1,
+                    data: {{testedtodos}}
+                }, {
+                    label: " میزان تست زده شده ",
+                    backgroundColor: "rgba(3, 88, 106, 0.3)",
+                    borderColor: "rgba(3, 88, 106, 0.70)",
+                    pointBorderColor: "rgba(3, 88, 106, 0.70)",
+                    pointBackgroundColor: "rgba(3, 88, 106, 0.70)",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "rgba(151,187,205,1)",
+                    pointBorderWidth: 1,
+                    data: {{testeddone}}
+                }]
+            },
+        });
+
+
+
+
+
+        var chart_doughnut_settings = {
+            type: 'doughnut',
+            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+            data: {
+                labels: [
+                    {% for cr in donat %} '{{cr.CourseName__Name}}' , {% endfor %}
+                ],
+                datasets: [{
+                    data: [{% for cr in donat %} {{cr.sum}} , {% endfor %}],
+                    backgroundColor: [
+                        {% for cr in donatTest %} getRandomColor() , {% endfor %}
+                    ],
+
+                }]
+            },
+            options: {
+                legend: false,
+                responsive: false
+            }
+        }
+
+        var ctx_donat = document.getElementById("donat");
+        var donatChart = new Chart(ctx_donat ,chart_doughnut_settings );
+
+
+
+
+
+
+        var chart_doughnut_test_settings = {
+            type: 'doughnut',
+            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+            data: {
+                labels: [
+                    {% for cr in donatTest %} '{{cr.CourseName__Name}}' , {% endfor %}
+                ],
+                datasets: [{
+                    data: [{% for cr in donatTest %} {{cr.sum}} , {% endfor %}],
+                    backgroundColor: [
+                        {% for cr in donatTest %} getRandomColor() , {% endfor %}
+                    ],
+
+                }]
+            },
+            options: {
+                legend: false,
+                responsive: false
+            }
+        }
+
+        var ctx_donatTest = document.getElementById("donatTest");
+        var donatTestChart = new Chart(ctx_donatTest ,chart_doughnut_test_settings );
+
+
+
+
+
+
+
+    </script>
+
+
+
+{% endblock javascripts %}

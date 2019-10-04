@@ -31,38 +31,44 @@ def adminpanel(request):
     template = loader.get_template('app/adminpanel.html')
     return HttpResponse(template.render(context, request))
 
-def studentpanel(request):
+
+def studentInfo(student , startJdate , endJdate) :
     context = {}
 
+    if startJdate == 0 and endJdate == 0 :
+        currentDate = jdatetime.date.today()
+        pastDate = jdatetime.date.today().__add__(jdatetime.timedelta(days=-7))
+    else :
+        currentDate = endJdate
+        pastDate =  startJdate
 
 
 
-    currentDate = jdatetime.date.today()
-    pastDate = jdatetime.date.today().__add__(jdatetime.timedelta(days=-7))
-    donat = list(Done.objects.filter(StudentName__Username=request.user,DoneDate__gte=pastDate , DoneDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))).values('CourseName__Name').order_by('CourseName__Name').annotate(sum=Sum('StudyHour')))
-    donatTest = list(Done.objects.filter(StudentName__Username=request.user,DoneDate__gte=pastDate , DoneDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))).values('CourseName__Name').order_by('CourseName__Name').annotate(sum=Sum('TestNumber')))
-    allTodo = list(Todo.objects.filter(StudentName__Username=request.user,DueDate__gte=pastDate , DueDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))))
-    allDone = list(Done.objects.filter(StudentName__Username=request.user,DoneDate__gte=pastDate , DoneDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))))
+    donat = list(Done.objects.filter(StudentName=student, DoneDate__gte=pastDate,
+                                     DoneDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))).values(
+        'CourseName__Name').order_by('CourseName__Name').annotate(sum=Sum('StudyHour')))
+    donatTest = list(Done.objects.filter(StudentName=student, DoneDate__gte=pastDate,
+                                         DoneDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))).values(
+        'CourseName__Name').order_by('CourseName__Name').annotate(sum=Sum('TestNumber')))
+    allTodo = list(Todo.objects.filter(StudentName=student, DueDate__gte=pastDate,
+                                       DueDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))))
+    allDone = list(Done.objects.filter(StudentName=student, DoneDate__gte=pastDate,
+                                       DoneDate__lte=currentDate.__add__(jdatetime.timedelta(days=-1))))
 
     all = {}
-    for done in allDone :
-        all[(done.CourseName , done.DoneDate)] = (None , done )
-    for todo in allTodo :
-        if (todo.CourseName , todo.DueDate) in all.keys() :
-            (x,y) = all[(todo.CourseName , todo.DueDate)]
-            all[(todo.CourseName, todo.DueDate)] = (todo,y)
-        else :
-            all[(todo.CourseName, todo.DueDate)] = (todo , None)
+    for done in allDone:
+        all[(done.CourseName, done.DoneDate)] = (None, done)
+    for todo in allTodo:
+        if (todo.CourseName, todo.DueDate) in all.keys():
+            (x, y) = all[(todo.CourseName, todo.DueDate)]
+            all[(todo.CourseName, todo.DueDate)] = (todo, y)
+        else:
+            all[(todo.CourseName, todo.DueDate)] = (todo, None)
 
     context['all'] = all
 
-
-
-    student = Student.objects.get(Username = request.user)
     context['Student'] = student
     context['Courses'] = []
-
-
 
     context['ReportDay'] = currentDate.day
     context['ReportMonth'] = jdatetime.date.j_months_fa[currentDate.month - 1]
@@ -74,33 +80,33 @@ def studentpanel(request):
     context['ReportYesterdayMonth'] = jdatetime.date.j_months_fa[yesterday.month - 1]
     context['ReportYesterdayYear'] = yesterday.year
 
-    yesterdayTodoList = Todo.objects.filter(StudentName__Username=request.user, DueDate=yesterday).order_by(
+    yesterdayTodoList = Todo.objects.filter(StudentName=student, DueDate=yesterday).order_by(
         'CourseName__id')
-    yesterdayDoneList = Done.objects.filter(StudentName__Username=request.user, DoneDate=yesterday).order_by(
+    yesterdayDoneList = Done.objects.filter(StudentName=student, DoneDate=yesterday).order_by(
         'CourseName__id')
 
-
-    courses = Course.objects.filter(Grade = student.Grade)
-    for course in courses :
+    courses = Course.objects.filter(Grade=student.Grade)
+    for course in courses:
         c = {}
         c['Name'] = course.Name
         c['id'] = course.id
-        done = Done.objects.filter(StudentName__Username=request.user, DoneDate=yesterday, CourseName = course)
-        donecurrent = Done.objects.filter(StudentName__Username=request.user, DoneDate=jdatetime.date.today(), CourseName = course)
+        done = Done.objects.filter(StudentName=student, DoneDate=yesterday, CourseName=course)
+        donecurrent = Done.objects.filter(StudentName=student, DoneDate=jdatetime.date.today(),
+                                          CourseName=course)
         c['read'] = 0
         c['test'] = 0
         c['readcurrent'] = 0
         c['testcurrent'] = 0
-        if len(done) :
+        if len(done):
             c['read'] = done[0].StudyHour
             c['test'] = done[0].TestNumber
-        if len(donecurrent) :
+        if len(donecurrent):
             c['readcurrent'] = donecurrent[0].StudyHour
             c['testcurrent'] = donecurrent[0].TestNumber
         context['Courses'].append(c)
 
     isOk = 0
-    if Done.objects.filter(StudentName__Username=request.user, DoneDate=yesterday):
+    if Done.objects.filter(StudentName=student, DoneDate=yesterday):
         context['readonlyYesterday'] = 'YES'
         isOk = 1
 
@@ -112,13 +118,13 @@ def studentpanel(request):
     context['ReportDay'] = jdatetime.date.today().day
     context['ReportMonth'] = jdatetime.date.j_months_fa[jdatetime.date.today().month - 1]
     context['ReportYear'] = jdatetime.date.today().year
-    list1 = Todo.objects.filter(StudentName__Username=request.user, DueDate=jdatetime.date.today()).order_by(
+    list1 = Todo.objects.filter(StudentName=student, DueDate=jdatetime.date.today()).order_by(
         'CourseName__id')
-    list2 = Done.objects.filter(StudentName__Username=request.user, DoneDate=jdatetime.date.today()).order_by(
+    list2 = Done.objects.filter(StudentName=student, DoneDate=jdatetime.date.today()).order_by(
         'CourseName__id')
 
     isOk = 0
-    if Done.objects.filter(StudentName__Username=request.user, DoneDate=jdatetime.date.today()):
+    if Done.objects.filter(StudentName=student, DoneDate=jdatetime.date.today()):
         context['readonly'] = 'YES'
         isOk = 1
 
@@ -127,24 +133,24 @@ def studentpanel(request):
 
     list3 = zip(list1, list2)
     context['List'] = list3
-    day = jdatetime.date.today()
+    day = currentDate
     context['readinghour'] = []
     context['todosHours'] = []
     context['testeddone'] = []
     context['testedtodos'] = []
     context['days'] = []
-    for i in range(0,7):
+    while day != pastDate:
         day = day.__add__(jdatetime.timedelta(days=-1))
-        dones = Done.objects.filter(StudentName__Username=request.user ,DoneDate=day )
-        todos = Todo.objects.filter(StudentName__Username=request.user ,DueDate=day )
+        dones = Done.objects.filter(StudentName=student, DoneDate=day)
+        todos = Todo.objects.filter(StudentName=student, DueDate=day)
         todosHours = 0
         testeddone = 0
         testedtodos = 0
         readinghours = 0
-        for d in dones :
+        for d in dones:
             todosHours += d.StudyHour
             testedtodos += d.TestNumber
-        for d in todos :
+        for d in todos:
             readinghours += d.StudyHour
             testeddone += d.TestNumber
         context['days'].append(day.day)
@@ -153,18 +159,39 @@ def studentpanel(request):
         context['todosHours'].append(todosHours)
         context['testedtodos'].append(testedtodos)
 
-    st = Student.objects.filter(Username=request.user)[0]
-    context['notseen'] = Notify.objects.filter(Receiver=st, Seen=False).count()
-
-
+    context['notseen'] = Notify.objects.filter(Receiver=student, Seen=False).count()
 
     context['donat'] = donat
     context['donatTest'] = donatTest
 
+    return context
 
+def studentpanel(request):
 
+    student = Student.objects.get(Username=request.user)
+    startJDate = 0
+    endJDate = 0
+    context = studentInfo(student , startJDate , endJDate)
 
     template = loader.get_template('app/studentpanel.html')
+    return HttpResponse(template.render(context, request))
+
+@csrf_exempt
+def student(request , id):
+
+    startJDate = 0
+    endJDate = 0
+    if request.method == 'POST' :
+        startDate = request.POST['fromdate'].split('-')
+        endDate = request.POST['todate'].split('-')
+        startJDate = jdatetime.date(int(startDate[0]), int(startDate[1]), int(startDate[2]))
+        endJDate = jdatetime.date(int(endDate[0]), int(endDate[1]), int(endDate[2]))
+
+
+    student = Student.objects.get(id=id)
+    context = studentInfo(student , startJDate , endJDate)
+
+    template = loader.get_template('app/studentInfo.html')
     return HttpResponse(template.render(context, request))
 
 
