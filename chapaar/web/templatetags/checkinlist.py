@@ -1,13 +1,16 @@
 from django import template
+import numpy as np
+
 
 register = template.Library()
 
 @register.filter(name='checkinlist')
 def checkinlist(value, arg):
+
     reslist= []
     for c  in value :
         flag = 0
-        for a , b in arg :
+        for a in arg :
             if int(a.CourseName.id) == int(c['id']) :
                 flag = 1
                 break
