@@ -114,6 +114,8 @@ def studentInfo(student , startJdate , endJdate) :
         yesterdayDoneList = yesterdayTodoList
 
     context['YesterdayList'] = zip(yesterdayTodoList, yesterdayDoneList)
+    context['YesterdayList2'] = zip(yesterdayTodoList, yesterdayDoneList)
+
 
     context['ReportDay'] = jdatetime.date.today().day
     context['ReportMonth'] = jdatetime.date.j_months_fa[jdatetime.date.today().month - 1]
@@ -133,6 +135,7 @@ def studentInfo(student , startJdate , endJdate) :
 
     list3 = zip(list1, list2)
     context['List'] = list3
+    context['List2'] = zip(list1, list2)
     day = currentDate
     context['readinghour'] = []
     context['todosHours'] = []

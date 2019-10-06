@@ -1,5 +1,6 @@
 {% extends "app/base_site_student.html" %}
 {% load mathfilters %}
+{% load checkinlist %}
 
 {% block title %} پنل مدیریت {% endblock title %}
 
@@ -63,7 +64,6 @@
                       <th>تعداد تست</th>
                       </thead>
                       <tbody>
-
                       {% for Task , Done in YesterdayList %}
                       <tr>
                         <td>{{ Task.CourseName.Name }}</td>
@@ -73,23 +73,17 @@
                         <td><input type="number" class="form-control"  name=test{{ Task.CourseName.id }} {% if readonlyYesterday %} readonly value={{ Done.TestNumber}} {% endif %} /></td>
                       </tr>
                       {% endfor %}
-                                                    {% for c in Courses %}
+                      {% for c in Courses|checkinlist:YesterdayList2 %}
+                             <tr>
+                             <td>{{c.Name}}
+                             </td><td></td>
+                            <td></td>
+                            <td> <input type="number" class="form-control" name=readed{{ c.id }}  {% if readonlyYesterday %} readonly value={{ c.read}} {% endif %}  /> </td>
+                            <td><input type="number" class="form-control"  name=test{{ c.id }} {% if readonlyYesterday %} readonly value={{ c.test}} {% endif %} /></td>
 
-                      <tr>
-                        <td>{{c.Name}}
-                          <!--<div class="input-group-prepend">
-                            <select class="select2_group form-control" name="course">
-                              <option value="{{c.id}}">{{c.Name}}</option>
-                            </select>
-                          </div>-->
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td> <input type="number" class="form-control" name=readed{{ c.id }}  {% if readonlyYesterday %} readonly value={{ c.read}} {% endif %}  /> </td>
-                        <td><input type="number" class="form-control"  name=test{{ c.id }} {% if readonlyYesterday %} readonly value={{ c.test}} {% endif %} /></td>
+                             </tr>
+                      {% endfor %}
 
-                      </tr>
-                                                    {% endfor %}
 
                       </tbody>
 
@@ -143,7 +137,7 @@
                         <td><input type="number" class="form-control"  name=test{{ Task.CourseName.id }} {% if readonly %} readonly value={{ Done.TestNumber}} {% endif %} step="1" /></td>
                       </tr>
                       {% endfor %}
-                      {% for c in Courses %}
+                      {% for c in Courses|checkinlist:List2 %}
                       <tr>
                         <td>
                           {{c.Name}}
