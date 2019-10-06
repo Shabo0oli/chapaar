@@ -1,5 +1,4 @@
 from django import template
-import numpy as np
 
 
 register = template.Library()
