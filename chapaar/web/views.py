@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import *
 from json import JSONEncoder
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Sum
+from django.shortcuts import redirect
+
 
 
 import jdatetime
@@ -368,3 +370,6 @@ def report(request):
                     record.save()
     return  studentpanel(request)
 
+def logout(request):
+    logout(request)
+    return redirect('/')
