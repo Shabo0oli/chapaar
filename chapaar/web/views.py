@@ -370,6 +370,6 @@ def report(request):
                     record.save()
     return  studentpanel(request)
 
-def logout(request):
+def logout_view(request):
     logout(request)
     return index(request)

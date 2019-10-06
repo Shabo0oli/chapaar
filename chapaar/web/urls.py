@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'verify/$', views.verify, name='verify'),
     url(r'settodo/([0-9]+)/$', views.settodo, name='settodo'),
     url(r'student/([0-9]+)/$', views.student, name='student'),
-    url(r'logout/$', views.logout, name='logout'),
+    url(r'logout/$', views.logout_view, name='logout_view'),
 
     # The home page
     url(r'^$', views.index, name='index'),
