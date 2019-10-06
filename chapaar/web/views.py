@@ -372,4 +372,4 @@ def report(request):
 
 def logout_view(request):
     logout(request)
-    return index(request)
+    return redirect('/')
